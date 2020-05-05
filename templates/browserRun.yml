@@ -16,6 +16,9 @@ steps:
   - script: |
       npm ci
     displayName: 'Install project dependencies'
+  - script: |
+      npm run dev
+    displayName: 'Start the server'
   - bash: |
       # Check if verbose mode needs to be turned on
       CMD=""
