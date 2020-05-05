@@ -3,6 +3,16 @@ steps:
     displayName: 'Use Node 12.x'
     inputs:
       versionSpec: 12.x
+    
+  # - task: Cache@2
+  #   displayName: 'Cache npm'
+  #   inputs:
+  #     key: 'npm | "$(Agent.OS)" | package-lock.json'
+  #     restoreKeys: |
+  #       npm | "$(Agent.OS)"
+  #       npm
+  #     path: $(npm_config_cache)
+
   - script: |
       npm ci
     displayName: 'Install project dependencies'
@@ -17,7 +27,7 @@ steps:
         CMD="$CMD DEBUG=cypress:*"
       fi
       VERIFY_CMD="$CMD ./node_modules/.bin/cypress verify"
-      RUN_CMD="$CMD npm start --browser ${{ parameters.browserType }}"
+      RUN_CMD="$CMD ./node_modules/.bin/cypress open --browser ${{ parameters.browserType }}"
       # Check if Cypress record information is provided
       if [ ! -z "$CYPRESS_RECORD_KEY" ]
       then
