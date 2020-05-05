@@ -23,8 +23,8 @@ steps:
       then
         CMD="$CMD DEBUG=cypress:*"
       fi
-      VERIFY_CMD="$CMD cypress verify"
-      RUN_CMD="$CMD cypress run --browser ${{ parameters.browserType }}"
+      VERIFY_CMD="$CMD ./node_modules/.bin/cypress verify"
+      RUN_CMD="$CMD ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }}"
       # Check if Cypress record information is provided
       if [ ! -z "$CYPRESS_RECORD_KEY" ]
       then
