@@ -19,7 +19,7 @@ steps:
       then
         CMD="$CMD DEBUG=cypress:*"
       fi
-      RUN_CMD="$CMD npm run start --reporter spec --reporter-options mochaFile=reporter-result.xml,toConsole=true --browser ${{ parameters.browserType }}"
+      RUN_CMD="$CMD npm run start ${{ parameters.browserType }}" 
       eval $RUN_CMD
     displayName: 'Run the cypress tests'
   # - bash: |
