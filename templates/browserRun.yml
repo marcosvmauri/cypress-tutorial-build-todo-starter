@@ -20,7 +20,8 @@ steps:
         CMD="$CMD DEBUG=cypress:*"
       fi
       RUN_CMD="$CMD npm run start --browser ${{ parameters.browserType }}"
-
+      eval $RUN_CMD
+    displayName: 'Run the cypress tests'
   # - bash: |
   #     # Check if verbose mode needs to be turned on
   #     CMD=""
