@@ -12,7 +12,7 @@ stages:
     pool:
       vmImage: macos-latest
     steps:
-      - template: devops/e2e.testing.yml
+      - template: templates/browserRun.yml
         parameters:
           browserType: chrome
 
@@ -25,7 +25,7 @@ stages:
     pool:
       vmImage: macos-latest
     steps:
-      - template: devops/e2e.testing.yml
+      - template: templates/browserRun.yml
         parameters:
           browserType: firefox
           
@@ -38,6 +38,6 @@ stages:
     pool:
       vmImage: macos-latest
     steps:
-      - template: devops/e2e.testing.yml
+      - template: templates/browserRun.yml
         parameters:
           browserType: edge
