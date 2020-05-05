@@ -7,32 +7,32 @@ steps:
       npm ci
     displayName: 'Install project dependencies'
   - script: |
-      npm run dev
+      npm run start
     displayName: 'Start the server'
-  - bash: |
-      # Check if verbose mode needs to be turned on
-      CMD=""
-      if [ "$VERBOSE" == "true" ]
-      then
-        CMD="$CMD DEBUG=cypress:*"
-      fi
-      VERIFY_CMD="$CMD ./node_modules/.bin/cypress verify"
-      RUN_CMD="$CMD npm start --browser ${{ parameters.browserType }}"
-      # Check if Cypress record information is provided
-      if [ ! -z "$CYPRESS_RECORD_KEY" ]
-      then
-        # Record key was set
-        RUN_CMD="$RUN_CMD --record --parallel --group \"${{ parameters.browserType }}\" --ci-build-id $BUILDID"
-      fi
-      eval $VERIFY_CMD
-      eval $RUN_CMD
-    displayName: 'Run the cypress tests'
-    env:
-      TERM: xterm # Avoid terminal warnings
-      VERBOSE: $(verbose)
-      BUILDID: $(Build.BuildId)
-      ${{ if ne(variables['cypress_record_key'], '') }}:
-        CYPRESS_RECORD_KEY: $(cypress_record_key)
+  # - bash: |
+  #     # Check if verbose mode needs to be turned on
+  #     CMD=""
+  #     if [ "$VERBOSE" == "true" ]
+  #     then
+  #       CMD="$CMD DEBUG=cypress:*"
+  #     fi
+  #     VERIFY_CMD="$CMD ./node_modules/.bin/cypress verify"
+  #     RUN_CMD="$CMD npm start --browser ${{ parameters.browserType }}"
+  #     # Check if Cypress record information is provided
+  #     if [ ! -z "$CYPRESS_RECORD_KEY" ]
+  #     then
+  #       # Record key was set
+  #       RUN_CMD="$RUN_CMD --record --parallel --group \"${{ parameters.browserType }}\" --ci-build-id $BUILDID"
+  #     fi
+  #     eval $VERIFY_CMD
+  #     eval $RUN_CMD
+    # displayName: 'Run the cypress tests'
+    # env:
+    #   TERM: xterm # Avoid terminal warnings
+    #   VERBOSE: $(verbose)
+    #   BUILDID: $(Build.BuildId)
+    #   ${{ if ne(variables['cypress_record_key'], '') }}:
+    #     CYPRESS_RECORD_KEY: $(cypress_record_key)
   
   - task: PublishTestResults@2
     displayName: 'Publish the test reports'
