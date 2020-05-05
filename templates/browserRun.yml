@@ -1,0 +1,65 @@
+steps:
+  - task: NodeTool@0
+    displayName: 'Use Node 12.x'
+    inputs:
+      versionSpec: 12.x
+    
+  # - task: Cache@2
+  #   displayName: 'Cache npm'
+  #   inputs:
+  #     key: 'npm | "$(Agent.OS)" | package-lock.json'
+  #     restoreKeys: |
+  #       npm | "$(Agent.OS)"
+  #       npm
+  #     path: $(npm_config_cache)
+
+  - script: |
+      npm ci
+    displayName: 'Install project dependencies'
+  - bash: |
+      # Check if verbose mode needs to be turned on
+      CMD=""
+      if [ "$VERBOSE" == "true" ]
+      then
+        CMD="$CMD DEBUG=cypress:*"
+      fi
+      VERIFY_CMD="$CMD cypress verify"
+      RUN_CMD="$CMD cypress run --browser ${{ parameters.browserType }}"
+      # Check if Cypress record information is provided
+      if [ ! -z "$CYPRESS_RECORD_KEY" ]
+      then
+        # Record key was set
+        RUN_CMD="$RUN_CMD --record --parallel --group \"${{ parameters.browserType }}\" --ci-build-id $BUILDID"
+      fi
+      eval $VERIFY_CMD
+      eval $RUN_CMD
+    displayName: 'Run the cypress tests'
+    env:
+      TERM: xterm # Avoid terminal warnings
+      VERBOSE: $(verbose)
+      BUILDID: $(Build.BuildId)
+      ${{ if ne(variables['cypress_record_key'], '') }}:
+        CYPRESS_RECORD_KEY: $(cypress_record_key)
+  
+  - task: PublishTestResults@2
+    displayName: 'Publish the test reports'
+    inputs:
+      testResultsFiles: '**/reports/junit.*.xml'
+    condition: succeededOrFailed()
+    continueOnError: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish screenshots when there were issues'
+    inputs:
+      pathtoPublish: 'cypress/screenshots'
+      artifactName: screenshots-${{ parameters.browserType }}
+    condition: failed()
+    continueOnError: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish videos'
+    inputs:
+      pathtoPublish: 'cypress/videos'
+      artifactName: videos-${{ parameters.browserType }}
+    condition: succeededOrFailed()
+    continueOnError: true
