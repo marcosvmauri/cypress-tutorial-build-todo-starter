@@ -7,7 +7,7 @@ steps:
       npm ci
     displayName: 'Install project dependencies'
   - script: |
-      npm run verify
+      npm run cypress-verify
     displayName: 'Verify if Cypress can be executed'
   # - script: |
   #     npm run start --browser ${{ parameters.browserType }}"
