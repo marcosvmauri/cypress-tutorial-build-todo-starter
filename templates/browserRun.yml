@@ -11,7 +11,7 @@ steps:
     displayName: 'Verify if Cypress can be executed'
   # - script: |
   #     npm run start --browser ${{ parameters.browserType }}"
-    displayName: 'Start the server & start the tests'
+  #     displayName: 'Start the server & start the tests'
   - bash: |
       # Check if verbose mode needs to be turned on
       CMD=""
