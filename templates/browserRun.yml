@@ -17,15 +17,14 @@ steps:
       if [ ${{ parameters.browserType }} == "chrome" ]
       then
         RUNCMD="$CMD npm start-chrome"
-
+      fi
       if [ ${{ parameters.browserType }} == "firefox" ]
       then
         RUNCMD="$CMD npm start-firefox"
-      
+      fi
       if [ ${{ parameters.browserType }} == "edge" ]
       then
         RUNCMD="$CMD npm start-edge"
-
       fi
       eval $RUNCMD
     displayName: 'Run the cypress tests'
