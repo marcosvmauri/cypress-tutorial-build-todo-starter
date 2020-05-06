@@ -13,7 +13,7 @@ steps:
   #     npm run start --browser ${{ parameters.browserType }}"
   #     displayName: 'Start the server & start the tests'
   - bash: |
-      eval "npm run start -- --browser=${{ parameters.browserType }}"
+      eval "start-server-and-test dev 3030 \"cypress-run --browser=${{ parameters.browserType }}\""
     displayName: 'Run the cypress tests'
   # - bash: |
   #     # Check if verbose mode needs to be turned on
