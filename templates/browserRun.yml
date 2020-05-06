@@ -13,13 +13,13 @@ steps:
   #     npm run start --browser ${{ parameters.browserType }}"
   #     displayName: 'Start the server & start the tests'
   - bash: |
-      if [ ${{ parameters.browserType }} == "chrome" ]
+      if [ "${{ parameters.browserType }}" == "chrome" ]
       then
         CMD="npm start-chrome"
-      if [ ${{ parameters.browserType }} == "firefox" ]
+      if [ "${{ parameters.browserType }}" == "firefox" ]
       then
         CMD="npm start-firefox"
-      if [ ${{ parameters.browserType }} == "edge" ]
+      if [ "${{ parameters.browserType }}" == "edge" ]
       then
         CMD="npm start-edge"
       fi
