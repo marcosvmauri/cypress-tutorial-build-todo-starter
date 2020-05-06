@@ -11,7 +11,7 @@
     "cypress-verify": "./node_modules/.bin/cypress verify",
     "cypress-open": "./node_modules/.bin/cypress open",
     "cypress-run": "./node_modules/.bin/cypress run",
-    "start-chrome": "start-server-and-test dev 3030 cypress-run --browser $1"
+    "start": "start-server-and-test dev 3030 cypress-run --browser $1"
   },
   "keywords": [],
   "author": "",
