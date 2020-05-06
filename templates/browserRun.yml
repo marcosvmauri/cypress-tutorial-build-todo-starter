@@ -14,7 +14,7 @@ steps:
   #     displayName: 'Start the server & start the tests'
   - bash: |
       CMD=""
-      if [ "${{ parameters.browserType }} == "chrome" ]
+      if [ ${{ parameters.browserType }} == "chrome" ]
       then
         CMD="$CMD npm start-chrome"
       if [ ${{ parameters.browserType }} == "firefox" ]
