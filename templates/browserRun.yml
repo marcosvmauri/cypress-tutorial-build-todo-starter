@@ -16,15 +16,18 @@ steps:
       CMD=""
       if [ ${{ parameters.browserType }} == "chrome" ]
       then
-        CMD="$CMD npm start-chrome"
+        RUNCMD="$CMD npm start-chrome"
+
       if [ ${{ parameters.browserType }} == "firefox" ]
       then
-        CMD="$CMD npm start-firefox"
+        RUNCMD="$CMD npm start-firefox"
+      
       if [ ${{ parameters.browserType }} == "edge" ]
       then
-        CMD="$CMD npm start-edge"
+        RUNCMD="$CMD npm start-edge"
+
       fi
-      eval $CMD
+      eval $RUNCMD
     displayName: 'Run the cypress tests'
   # - bash: |
   #     # Check if verbose mode needs to be turned on
