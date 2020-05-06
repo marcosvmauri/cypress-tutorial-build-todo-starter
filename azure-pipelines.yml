@@ -15,7 +15,6 @@ stages:
       - template: templates/browserRun.yml
         parameters:
           browserType: chrome
-          verbose: true
 
 - stage: e2e_testing_stage_firefox
   displayName: 'Firefox E2E Testing'
@@ -29,7 +28,6 @@ stages:
       - template: templates/browserRun.yml
         parameters:
           browserType: firefox
-          verbose: true
           
 - stage: e2e_testing_stage_edge
   displayName: 'Edge E2E Testing'
@@ -43,4 +41,3 @@ stages:
       - template: templates/browserRun.yml
         parameters:
           browserType: edge
-          verbose: true
