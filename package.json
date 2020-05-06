@@ -11,9 +11,9 @@
     "cypress-verify": "./node_modules/.bin/cypress verify",
     "cypress-open": "./node_modules/.bin/cypress open",
     "cypress-run": "./node_modules/.bin/cypress run",
-    "start-chrome": "start-server-and-test dev 3030 \"cypress-run --browser=chrome\"",
-    "start-firefox": "start-server-and-test dev 3030 \"cypress-run --browser=firefox\"",
-    "start-edge": "start-server-and-test dev 3030 \"cypress-run --browser=edge\""
+    "start-chrome": "start-server-and-test dev 3030 \"npm run cypress-run --browser=chrome\"",
+    "start-firefox": "start-server-and-test dev 3030 \"npm run cypress-run --browser=firefox\"",
+    "start-edge": "start-server-and-test dev 3030 cypress-run --browser=edge"
   },
   "keywords": [],
   "author": "",
