@@ -9,9 +9,6 @@ steps:
   - script: |
       npm run cypress-verify
     displayName: 'Verify if Cypress can be executed'
-  # - script: |
-  #     npm run start --browser ${{ parameters.browserType }}"
-  #     displayName: 'Start the server & start the tests'
   - bash: |
       CMD=""
       if [ ${{ parameters.browserType }} == "chrome" ]
@@ -56,22 +53,22 @@ steps:
   - task: PublishTestResults@2
     displayName: 'Publish the test reports'
     inputs:
-      testResultsFiles: '**/reports/junit.*.xml'
+      testResultsFiles: 'results/junit-result.xml'
     condition: succeededOrFailed()
     continueOnError: true
 
-  - task: PublishBuildArtifacts@1
+  - task: PublishPipelineArtifact@0
     displayName: 'Publish screenshots when there were issues'
     inputs:
-      pathtoPublish: 'cypress/screenshots'
+      targetPath: 'cypress/screenshots'
       artifactName: screenshots-${{ parameters.browserType }}
     condition: failed()
     continueOnError: true
 
-  - task: PublishBuildArtifacts@1
+  - task: PublishPipelineArtifact@0
     displayName: 'Publish videos'
     inputs:
-      pathtoPublish: 'cypress/videos'
+      targetPath: 'cypress/videos'
       artifactName: videos-${{ parameters.browserType }}
     condition: succeededOrFailed()
     continueOnError: true
