@@ -53,7 +53,7 @@ steps:
   - task: PublishTestResults@2
     displayName: 'Publish the test reports'
     inputs:
-      testResultsFiles: 'results/junit-result.xml'
+      testResultsFiles: '**/junit-result.xml'
     condition: succeededOrFailed()
     continueOnError: true
 
