@@ -1,5 +1,3 @@
-schedules:
-- cron: "0 0 1 * *"
 name: 'Cypress E2E Testing'
 
 trigger:
